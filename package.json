@@ -1,0 +1,22 @@
+{
+  "name": "yo-yo-co",
+  "version": "0.0.1",
+  "description": "yo-yo.js, with added components",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chromakode/yo-yo-co.git"
+  },
+  "keywords": [],
+  "author": "Max Goodman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chromakode/yo-yo-co/issues"
+  },
+  "homepage": "https://github.com/chromakode/yo-yo-co#readme",
+  "dependencies": {
+    "hyperx": "^2.0.2",
+    "bel": "^3.0.0",
+    "morphdom": "^1.1.2"
+  }
+}
