@@ -23,6 +23,7 @@ var yo = module.exports = hyperx(function yo (tag, props, children) {
 var components = module.components = {}
 
 var BaseComponent = {}
+
 BaseComponent.setState = function (nextState) {
   updatedState = {}
   for (var name in this.state) {
@@ -45,7 +46,7 @@ BaseComponent.setState = function (nextState) {
 // register a component
 module.exports.co = function (name, spec) {
   spec.setState = BaseComponent.setState
-  var constructor = function() {}
+  var constructor = function () {}
   constructor.prototype = spec
   components[name] = constructor
 }
@@ -112,7 +113,7 @@ function onBeforeMorphEl (fromEl, toEl) {
   }
 }
 
-function walkChildren(node, visit) {
+function walkChildren (node, visit) {
   if (visit(node) === false) {
     return
   }
