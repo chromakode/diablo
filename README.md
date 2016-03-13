@@ -6,7 +6,7 @@ adding composable custom components.
 
 ## Components
 
-Components in diablo are very similar to React.
+Components in Diablo are very similar to React.
 
 Register a named component using `yo.co`:
 
@@ -53,7 +53,7 @@ they can use to skip rendering their subtree if their data hasn't changed.
 
 ## Rendering
 
-In diablo, `yo.render(fromNode, [toNode])` is used to create or update
+In Diablo, `yo.render(fromNode, [toNode])` is used to create or update
 existing DOM trees. If passed a single argument, it and its subcomponents will
 be rendered. If two arguments are specified, the first argument will be diffed
 and efficiently updated based on the structure of the second argument.
