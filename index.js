@@ -46,7 +46,7 @@ function renderComponent (node, prevNode) {
   // store the instance on the node and update state properties
   co.instance = instance
   instance.props = co.props
-  instance.children = co.children
+  instance.props.children = co.children
 
   // render the component instance into the node
   var content = instance.render()

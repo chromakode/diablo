@@ -8,7 +8,7 @@ yo.co('MyButton', {
   render: function () {
     return yo`
       <button onclick=${this.handleClick.bind(this)}>
-        Cool Button: ${this.children}
+        Cool Button: ${this.props.children}
       </button>
     `
   },
