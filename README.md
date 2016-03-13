@@ -1,6 +1,6 @@
 # yo-yo-co
 
-This is an experimental fork of [yo-yo.js](https://github.com/maxogden/yo-yo),
+This is an experimental fork of [yo-yo.js](https://github.com/maxogden/yo-yo)
 adding composable custom components.
 
 
