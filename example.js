@@ -5,6 +5,14 @@ yo.co('MyButton', {
     return {clicks: 0}
   },
 
+  componentDidMount: function() {
+    console.log('mounted!', this)
+  },
+
+  componentWillUnmount: function() {
+    console.log('unmounting!', this)
+  },
+
   handleClick: function () {
     this.props.onclick()
     this.setState({
@@ -22,10 +30,20 @@ yo.co('MyButton', {
 })
 
 yo.co('List', {
+  getInitialState: function() {
+    return {buttonRemoved: false}
+  },
+
   shouldComponentUpdate: function(nextProps, nextState) {
     if (nextProps.items.length > 5) {
       return false
     }
+  },
+
+  handleRemoveButton: function() {
+    this.setState({
+      buttonRemoved: true,
+    })
   },
 
   render: function () {
@@ -38,6 +56,7 @@ yo.co('List', {
           })}
         </ul>
         <MyButton onclick=${this.props.onclick}>Add Random Number</MyButton>
+        ${!this.state.buttonRemoved ? yo`<MyButton onclick=${this.handleRemoveButton.bind(this)}>Click to remove!</MyButton>` : null}
       </div>
     `
   },

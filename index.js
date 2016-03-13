@@ -43,9 +43,14 @@ BaseComponent.setState = function (nextState) {
   }
 }
 
+BaseComponent.getDOMNode = function () {
+  return this._node
+}
+
 // register a component
 module.exports.co = function (name, spec) {
   spec.setState = BaseComponent.setState
+  spec.getDOMNode = BaseComponent.getDOMNode
   var constructor = function () {}
   constructor.prototype = spec
   components[name] = constructor
@@ -88,6 +93,7 @@ function onBeforeMorphEl (fromEl, toEl) {
     if (renderComponent(toEl, fromEl) !== false) {
       morphdom(fromEl, toEl, {
         onBeforeMorphEl: onBeforeMorphEl,
+        onBeforeNodeDiscarded: onBeforeNodeDiscarded,
         childrenOnly: true
       })
     }
@@ -113,6 +119,12 @@ function onBeforeMorphEl (fromEl, toEl) {
   }
 }
 
+function onBeforeNodeDiscarded (node) {
+  if (node._co && node._co.instance && node._co.instance.componentWillUnmount) {
+    node._co.instance.componentWillUnmount()
+  }
+}
+
 function walkChildren (node, visit) {
   if (visit(node) === false) {
     return
@@ -129,6 +141,7 @@ var render = module.exports.render = function (fromNode, toNode) {
   if (toNode) {
     morphdom(fromNode, toNode, {
       onBeforeMorphEl: onBeforeMorphEl,
+      onBeforeNodeDiscarded: onBeforeNodeDiscarded,
     })
   }
 
@@ -136,6 +149,9 @@ var render = module.exports.render = function (fromNode, toNode) {
   var co = fromNode._co
   if (co && components.hasOwnProperty(co.tag) && !co.instance) {
     renderComponent(fromNode)
+    if (co.instance.componentDidMount) {
+      co.instance.componentDidMount()
+    }
 
     // walk children and check if they need instantiation
     walkChildren(fromNode, render)

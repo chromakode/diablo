@@ -50,6 +50,13 @@ Components support a setState method, which behaves similar to React. The
 current state of a component is available as `this.state` within `render()`
 methods.
 
+### componentDidMount / componentWillUnmount
+
+These methods, if defined on a component, will be called after a component is
+added to the DOM, and before it is removed from the DOM. Within these
+functions, `component.getDOMNode()` can be used to obtain a reference to the
+component's current top-level DOM element.
+
 ### shouldComponentUpdate
 
 Components support an optional `shouldComponentUpdate(nextProps, nextState)`
