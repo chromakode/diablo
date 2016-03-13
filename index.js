@@ -84,7 +84,7 @@ function renderComponent (node, prevNode) {
 
 function onBeforeMorphEl (fromEl, toEl) {
   // update instantiated component
-  if (fromEl._co.instance) {
+  if (fromEl._co && fromEl._co.instance) {
     if (renderComponent(toEl, fromEl) !== false) {
       morphdom(fromEl, toEl, {
         onBeforeMorphEl: onBeforeMorphEl,
