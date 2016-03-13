@@ -44,11 +44,17 @@ Component instances persist between re-renders. In the future, it should be
 possible to implement local component state and lifecycle methods similar to
 React.
 
+### setState
+
+Components support a setState method, which behaves similar to React. The
+current state of a component is available as `this.state` within `render()`
+methods.
 
 ### shouldComponentUpdate
 
-Components support an optional `shouldComponentUpdate(nextProps)` method which
-they can use to skip rendering their subtree if their data hasn't changed.
+Components support an optional `shouldComponentUpdate(nextProps, nextState)`
+method which they can use to skip rendering their subtree if their data hasn't
+changed.
 
 
 ## Rendering

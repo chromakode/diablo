@@ -22,8 +22,29 @@ var yo = module.exports = hyperx(function yo (tag, props, children) {
 // component registry
 var components = module.components = {}
 
+var BaseComponent = {}
+BaseComponent.setState = function (nextState) {
+  updatedState = {}
+  for (var name in this.state) {
+    if (this.state.hasOwnProperty(name)) {
+      updatedState[name] = this.state[name]
+    }
+  }
+  for (var name in nextState) {
+    if (nextState.hasOwnProperty(name)) {
+      updatedState[name] = nextState[name]
+    }
+  }
+  var shouldUpdate = this.shouldComponentUpdate && this.shouldComponentUpdate(this.props, updatedState) !== false
+  this.state = updatedState
+  if (shouldUpdate !== false) {
+    render(this._node.firstChild, this.render())
+  }
+}
+
 // register a component
 module.exports.co = function (name, spec) {
+  spec.setState = BaseComponent.setState
   var constructor = function() {}
   constructor.prototype = spec
   components[name] = constructor
@@ -41,10 +62,14 @@ function renderComponent (node, prevNode) {
   } else {
     // otherwise, create one
     instance = new components[co.tag]
+    if (instance.getInitialState) {
+      instance.state = instance.getInitialState()
+    }
   }
 
   // store the instance on the node and update state properties
   co.instance = instance
+  instance._node = prevNode || node
   instance.props = co.props
   instance.props.children = co.children
 

@@ -1,21 +1,28 @@
 var yo = require('diablo')
 
 yo.co('MyButton', {
+  getInitialState: function() {
+    return {clicks: 0}
+  },
+
   handleClick: function () {
     this.props.onclick()
+    this.setState({
+      clicks: this.state.clicks + 1,
+    })
   },
 
   render: function () {
     return yo`
       <button onclick=${this.handleClick.bind(this)}>
-        Cool Button: ${this.props.children}
+        Cool Button: ${this.props.children} (clicked ${this.state.clicks} times)
       </button>
     `
   },
 })
 
 yo.co('List', {
-  shouldComponentUpdate: function(nextProps) {
+  shouldComponentUpdate: function(nextProps, nextState) {
     if (nextProps.items.length > 5) {
       return false
     }
