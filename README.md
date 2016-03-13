@@ -1,7 +1,7 @@
 # Diablo
 
-This is an experimental fork of [yo-yo.js](https://github.com/maxogden/yo-yo)
-adding composable custom components.
+An experimental fork of [yo-yo.js](https://github.com/maxogden/yo-yo) adding
+composable custom components.
 
 
 ## Components
