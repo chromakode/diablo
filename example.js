@@ -1,4 +1,4 @@
-var yo = require('yo-yo-co')
+var yo = require('diablo')
 
 yo.co('MyButton', {
   handleClick: function () {
