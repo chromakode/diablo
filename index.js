@@ -2,7 +2,7 @@ var hyperx = require('hyperx')
 var bel = require('bel')
 var morphdom = require('morphdom')
 
-module.exports = hyperx(function yo (tag, props, children) {
+module.exports = hyperx(function x (tag, props, children) {
   var el
   if (components.hasOwnProperty(tag)) {
     // create a placeholder for a component
@@ -49,7 +49,7 @@ BaseComponent.getDOMNode = function () {
 }
 
 // register a component
-module.exports.co = function (name, spec) {
+module.exports.component = function (name, spec) {
   spec.setState = BaseComponent.setState
   spec.getDOMNode = BaseComponent.getDOMNode
   var constructor = function () {}

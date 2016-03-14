@@ -8,16 +8,16 @@ composable custom components.
 
 Components in Diablo are very similar to React.
 
-Register a named component using `yo.co`:
+Register a named component using `x.component`:
 
 ```js
-yo.co('MyButton', {
+x.component('MyButton', {
   handleClick: function () {
     this.props.onclick()
   },
 
   render: function () {
-    return yo`
+    return x`
       <button onclick=${this.handleClick.bind(this)}>
         Cool Button: ${this.children}
       </button>
@@ -26,17 +26,17 @@ yo.co('MyButton', {
 })
 ```
 
-You can then create `MyButton` components by rendering ```yo`template````
+You can then create `MyButton` components by rendering ```x`template````
 literals:
 
 ```js
 function sup() { alert('yo, sup?') }
-var el = yo.render(yo`<MyButton onclick=${sup}></MyButton>`)
+var el = x.render(x`<MyButton onclick=${sup}></MyButton>`)
 ```
 
 When DOM is generated using template literals, placeholders for components are
 created which are not instantiated yet. For instance,
-```yo`<MyButton onclick=${sup}></MyButton>` ```
+```x`<MyButton onclick=${sup}></MyButton>` ```
 will return a `<co-mybutton />` DOM node which records the props you specified
 which has not been instantiated or rendered.
 
@@ -66,7 +66,7 @@ changed.
 
 ## Rendering
 
-In Diablo, `yo.render(fromNode, [toNode])` is used to create or update
+In Diablo, `x.render(fromNode, [toNode])` is used to create or update
 existing DOM trees. If passed a single argument, it and its subcomponents will
 be rendered. If two arguments are specified, the first argument will be diffed
 and efficiently updated based on the structure of the second argument.
