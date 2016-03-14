@@ -14,7 +14,7 @@ x.component('MyButton', {
   },
 
   handleClick: function () {
-    this.props.onclick()
+    this.props.onClick()
     this.setState({
       clicks: this.state.clicks + 1
     })
@@ -22,7 +22,7 @@ x.component('MyButton', {
 
   render: function () {
     return x`
-      <button onclick=${this.handleClick.bind(this)}>
+      <button onClick=${this.handleClick.bind(this)}>
         Cool Button: ${this.props.children} (clicked ${this.state.clicks} times)
       </button>
     `
@@ -55,8 +55,8 @@ x.component('List', {
             return x`<li>${item}</li>`
           })}
         </ul>
-        <MyButton onclick=${this.props.onclick}>Add Random Number</MyButton>
-        ${!this.state.buttonRemoved ? x`<MyButton onclick=${this.handleRemoveButton.bind(this)}>Click to remove!</MyButton>` : null}
+        <MyButton onClick=${this.props.onClick}>Add Random Number</MyButton>
+        ${!this.state.buttonRemoved ? x`<MyButton onClick=${this.handleRemoveButton.bind(this)}>Click to remove!</MyButton>` : null}
       </div>
     `
   }
@@ -67,10 +67,10 @@ function update (n) {
 
   // create a new callback each time (to demonstrate event handler updating)
   var nextUpdate = function () { update(Math.random()) }
-  x.render(el, x`<List onclick=${nextUpdate} items=${numbers}></List>`)
+  x.render(el, x`<List onClick=${nextUpdate} items=${numbers}></List>`)
 }
 
 var numbers = []
-var el = x.render(x`<List onclick=${update} items=${numbers}></List>`)
+var el = x.render(x`<List onClick=${update} items=${numbers}></List>`)
 document.body.appendChild(el)
 update(0)

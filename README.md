@@ -13,12 +13,12 @@ Register a named component using `x.component`:
 ```js
 x.component('MyButton', {
   handleClick: function () {
-    this.props.onclick()
+    this.props.onClick()
   },
 
   render: function () {
     return x`
-      <button onclick=${this.handleClick.bind(this)}>
+      <button onClick=${this.handleClick.bind(this)}>
         Cool Button: ${this.children}
       </button>
     `
@@ -31,7 +31,7 @@ literals:
 
 ```js
 function sup() { alert('yo, sup?') }
-var el = x.render(x`<MyButton onclick=${sup}></MyButton>`)
+var el = x.render(x`<MyButton onClick=${sup}></MyButton>`)
 ```
 
 When DOM is generated using template literals, placeholders for components are

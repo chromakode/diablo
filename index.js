@@ -7,14 +7,27 @@ module.exports = hyperx(function x (tag, props, children) {
   if (components.hasOwnProperty(tag)) {
     // create a placeholder for a component
     el = document.createElement('co-' + tag.toLowerCase())
+    el._co = {
+      tag: tag,
+      props: props,
+      children: children
+    }
   } else {
     // regular node. construct with bel
-    el = bel(tag, props, children)
-  }
-  el._co = {
-    tag: tag,
-    props: props,
-    children: children
+    var elProps = {}
+    var events = {}
+    for (var name in props) {
+      var value = props[name]
+      if (name.slice(0, 2) === 'on') {
+        name = name.toLowerCase()
+        events[name] = value
+      }
+      elProps[name] = value
+    }
+    el = bel(tag, elProps, children)
+    el._co = {
+      events: events
+    }
   }
   return el
 })
@@ -103,19 +116,21 @@ function onBeforeMorphEl (fromEl, toEl) {
     return false
   }
 
-  // if the node is not a component, update event handlers
-  var toProps = toEl._co.props
-  var prop
-  for (prop in toProps) {
-    if (prop.slice(0, 2) === 'on' && toProps.hasOwnProperty(prop)) {
-      fromEl[prop] = toProps[prop]
+  if (toEl._co && toEl._co.events) {
+    // if the node is not a component, update event handlers
+    var toEvents = toEl._co.events
+    var name
+    for (name in toEvents) {
+      if (toEvents.hasOwnProperty(name)) {
+        fromEl[name] = toEvents[name]
+      }
     }
-  }
-  if (fromEl._co) {
-    var fromProps = fromEl._co.props
-    for (prop in fromProps) {
-      if (prop.slice(0, 2) === 'on' && !toProps.hasOwnProperty(prop)) {
-        delete fromEl[prop]
+    if (fromEl._co && fromEl._co.events) {
+      var fromEvents = fromEl._co.events
+      for (name in fromEvents) {
+        if (!toEvents.hasOwnProperty(name)) {
+          delete fromEl[name]
+        }
       }
     }
   }
@@ -149,7 +164,7 @@ var render = module.exports.render = function (fromNode, toNode) {
 
   // now, our node might need instantiation
   var co = fromNode._co
-  if (co && components.hasOwnProperty(co.tag) && !co.instance) {
+  if (co && co.tag && components.hasOwnProperty(co.tag) && !co.instance) {
     renderComponent(fromNode)
     if (co.instance.componentDidMount) {
       co.instance.componentDidMount()
