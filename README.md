@@ -31,7 +31,7 @@ literals:
 
 ```js
 function sup() { alert('yo, sup?') }
-var el = x.render(x`<MyButton onClick=${sup}></MyButton>`)
+x.render(x`<MyButton onClick=${sup}></MyButton>`, document.body)
 ```
 
 When DOM is generated using template literals, placeholders for components are
@@ -66,7 +66,6 @@ changed.
 
 ## Rendering
 
-In Diablo, `x.render(fromNode, [toNode])` is used to create or update
-existing DOM trees. If passed a single argument, it and its subcomponents will
-be rendered. If two arguments are specified, the first argument will be diffed
-and efficiently updated based on the structure of the second argument.
+In Diablo, `x.render(element, container)` functions similar to React. It will
+render an element into a container. If the element was previously rendered in
+the container, the container will be efficiently updated via a DOM diff.

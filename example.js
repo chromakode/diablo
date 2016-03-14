@@ -67,10 +67,8 @@ function update (n) {
 
   // create a new callback each time (to demonstrate event handler updating)
   var nextUpdate = function () { update(Math.random()) }
-  x.render(el, x`<List onClick=${nextUpdate} items=${numbers}></List>`)
+  x.render(x`<List onClick=${nextUpdate} items=${numbers}></List>`, document.body)
 }
 
 var numbers = []
-var el = x.render(x`<List onClick=${update} items=${numbers}></List>`)
-document.body.appendChild(el)
-update(0)
+x.render(x`<List onClick=${function () { update(0) }} items=${numbers}></List>`, document.body)

@@ -53,7 +53,7 @@ BaseComponent.setState = function (nextState) {
   var shouldUpdate = this.shouldComponentUpdate && this.shouldComponentUpdate(this.props, updatedState) !== false
   this.state = updatedState
   if (shouldUpdate !== false) {
-    render(this._node.firstChild, this.render())
+    update(this._node.firstChild, this.render())
   }
 }
 
@@ -153,26 +153,26 @@ function walkChildren (node, visit) {
   }
 }
 
-var render = module.exports.render = function (fromNode, toNode) {
-  // if we are updating an existing node, do it first
-  if (toNode) {
-    morphdom(fromNode, toNode, {
-      onBeforeMorphEl: onBeforeMorphEl,
-      onBeforeNodeDiscarded: onBeforeNodeDiscarded
-    })
-  }
+function update (fromNode, toNode, childrenOnly) {
+  morphdom(fromNode, toNode, {
+    onBeforeMorphEl: onBeforeMorphEl,
+    onBeforeNodeDiscarded: onBeforeNodeDiscarded
+  })
 
-  // now, our node might need instantiation
-  var co = fromNode._co
-  if (co && co.tag && components.hasOwnProperty(co.tag) && !co.instance) {
-    renderComponent(fromNode)
-    if (co.instance.componentDidMount) {
-      co.instance.componentDidMount()
+  // descend through children and instantiate if necessary
+  walkChildren(fromNode, function (node) {
+    var co = node._co
+    if (co && co.tag && components.hasOwnProperty(co.tag) && !co.instance) {
+      renderComponent(node)
+      if (co.instance.componentDidMount) {
+        co.instance.componentDidMount()
+      }
     }
+  })
+}
 
-    // walk children and check if they need instantiation
-    walkChildren(fromNode, render)
-  }
-
-  return fromNode
+module.exports.render = function (element, container) {
+  var toContainer = container.cloneNode()
+  toContainer.appendChild(element)
+  update(container, toContainer)
 }
