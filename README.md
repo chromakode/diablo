@@ -1,5 +1,8 @@
 # Diablo
 
+[![npm](https://img.shields.io/npm/v/diablo.svg?style=flat-square)](https://www.npmjs.com/package/diablo)
+[![license](https://img.shields.io/npm/l/diablo.svg?style=flat-square)](https://github.com/chromakode/diablo/blob/master/LICENSE)
+
 An experimental fork of [yo-yo.js](https://github.com/maxogden/yo-yo) adding
 composable custom components.
 
