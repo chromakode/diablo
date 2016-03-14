@@ -73,7 +73,7 @@ module.exports.component = function (name, spec) {
 function renderComponent (node, prevNode) {
   var co = node._co
   var instance
-  if (prevNode && prevNode._co.instance) {
+  if (prevNode && prevNode._co && prevNode._co.instance) {
     // if an instance exists, use it
     instance = prevNode._co.instance
     if (instance.shouldComponentUpdate && instance.shouldComponentUpdate(co.props) === false) {
@@ -103,7 +103,7 @@ function renderComponent (node, prevNode) {
 
 function onBeforeMorphEl (fromEl, toEl) {
   // update instantiated component
-  if (fromEl._co && fromEl._co.instance) {
+  if (toEl._co && toEl._co.tag) {
     if (renderComponent(toEl, fromEl) !== false) {
       morphdom(fromEl, toEl, {
         onBeforeMorphEl: onBeforeMorphEl,
