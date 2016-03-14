@@ -8,7 +8,7 @@ module.exports = hyperx(function x (tag, props, children) {
     // create a placeholder for a component
     el = document.createElement('co-' + tag.toLowerCase())
     el._co = {
-      tag: tag,
+      component: tag,
       props: props,
       children: children
     }
@@ -81,7 +81,7 @@ function renderComponent (node, prevNode) {
     }
   } else {
     // otherwise, create one
-    instance = new components[co.tag]()
+    instance = new components[co.component]()
     if (instance.getInitialState) {
       instance.state = instance.getInitialState()
     }
@@ -103,7 +103,7 @@ function renderComponent (node, prevNode) {
 
 function onBeforeMorphEl (fromEl, toEl) {
   // update instantiated component
-  if (toEl._co && toEl._co.tag) {
+  if (toEl._co && toEl._co.component) {
     if (renderComponent(toEl, fromEl) !== false) {
       morphdom(fromEl, toEl, {
         onBeforeMorphEl: onBeforeMorphEl,
@@ -162,7 +162,7 @@ function update (fromNode, toNode, childrenOnly) {
   // descend through children and instantiate if necessary
   walkChildren(fromNode, function (node) {
     var co = node._co
-    if (co && co.tag && components.hasOwnProperty(co.tag) && !co.instance) {
+    if (co && co.component && !co.instance) {
       renderComponent(node)
       if (co.instance.componentDidMount) {
         co.instance.componentDidMount()
