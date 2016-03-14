@@ -1,22 +1,22 @@
 var yo = require('diablo')
 
 yo.co('MyButton', {
-  getInitialState: function() {
+  getInitialState: function () {
     return {clicks: 0}
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     console.log('mounted!', this)
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     console.log('unmounting!', this)
   },
 
   handleClick: function () {
     this.props.onclick()
     this.setState({
-      clicks: this.state.clicks + 1,
+      clicks: this.state.clicks + 1
     })
   },
 
@@ -26,23 +26,23 @@ yo.co('MyButton', {
         Cool Button: ${this.props.children} (clicked ${this.state.clicks} times)
       </button>
     `
-  },
+  }
 })
 
 yo.co('List', {
-  getInitialState: function() {
+  getInitialState: function () {
     return {buttonRemoved: false}
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
+  shouldComponentUpdate: function (nextProps, nextState) {
     if (nextProps.items.length > 5) {
       return false
     }
   },
 
-  handleRemoveButton: function() {
+  handleRemoveButton: function () {
     this.setState({
-      buttonRemoved: true,
+      buttonRemoved: true
     })
   },
 
@@ -59,14 +59,14 @@ yo.co('List', {
         ${!this.state.buttonRemoved ? yo`<MyButton onclick=${this.handleRemoveButton.bind(this)}>Click to remove!</MyButton>` : null}
       </div>
     `
-  },
+  }
 })
 
 function update (n) {
   numbers.push(n)
 
   // create a new callback each time (to demonstrate event handler updating)
-  var nextUpdate = function() { update(Math.random()) }
+  var nextUpdate = function () { update(Math.random()) }
   yo.render(el, yo`<List onclick=${nextUpdate} items=${numbers}></List>`)
 }
 

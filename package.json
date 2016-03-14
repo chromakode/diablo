@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "yo-yo.js, with added components",
   "main": "index.js",
+  "scripts": {
+    "lint": "standard"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/chromakode/diablo.git"
@@ -18,5 +21,8 @@
     "hyperx": "^2.0.2",
     "bel": "^3.0.0",
     "morphdom": "^1.1.2"
+  },
+  "devDependencies": {
+    "standard": "~6.0.8"
   }
 }

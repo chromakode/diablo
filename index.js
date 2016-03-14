@@ -2,7 +2,7 @@ var hyperx = require('hyperx')
 var bel = require('bel')
 var morphdom = require('morphdom')
 
-var yo = module.exports = hyperx(function yo (tag, props, children) {
+module.exports = hyperx(function yo (tag, props, children) {
   var el
   if (components.hasOwnProperty(tag)) {
     // create a placeholder for a component
@@ -14,7 +14,7 @@ var yo = module.exports = hyperx(function yo (tag, props, children) {
   el._co = {
     tag: tag,
     props: props,
-    children: children,
+    children: children
   }
   return el
 })
@@ -25,13 +25,14 @@ var components = module.components = {}
 var BaseComponent = {}
 
 BaseComponent.setState = function (nextState) {
-  updatedState = {}
-  for (var name in this.state) {
+  var updatedState = {}
+  var name
+  for (name in this.state) {
     if (this.state.hasOwnProperty(name)) {
       updatedState[name] = this.state[name]
     }
   }
-  for (var name in nextState) {
+  for (name in nextState) {
     if (nextState.hasOwnProperty(name)) {
       updatedState[name] = nextState[name]
     }
@@ -67,7 +68,7 @@ function renderComponent (node, prevNode) {
     }
   } else {
     // otherwise, create one
-    instance = new components[co.tag]
+    instance = new components[co.tag]()
     if (instance.getInitialState) {
       instance.state = instance.getInitialState()
     }
@@ -82,7 +83,7 @@ function renderComponent (node, prevNode) {
   // render the component instance into the node
   var content = instance.render()
   while (node.firstChild) {
-    node.removeChild(node.firstChild);
+    node.removeChild(node.firstChild)
   }
   node.appendChild(content)
 }
@@ -104,14 +105,15 @@ function onBeforeMorphEl (fromEl, toEl) {
 
   // if the node is not a component, update event handlers
   var toProps = toEl._co.props
-  for (var prop in toProps) {
+  var prop
+  for (prop in toProps) {
     if (prop.slice(0, 2) === 'on' && toProps.hasOwnProperty(prop)) {
       fromEl[prop] = toProps[prop]
     }
   }
   if (fromEl._co) {
     var fromProps = fromEl._co.props
-    for (var prop in fromProps) {
+    for (prop in fromProps) {
       if (prop.slice(0, 2) === 'on' && !toProps.hasOwnProperty(prop)) {
         delete fromEl[prop]
       }
@@ -141,7 +143,7 @@ var render = module.exports.render = function (fromNode, toNode) {
   if (toNode) {
     morphdom(fromNode, toNode, {
       onBeforeMorphEl: onBeforeMorphEl,
-      onBeforeNodeDiscarded: onBeforeNodeDiscarded,
+      onBeforeNodeDiscarded: onBeforeNodeDiscarded
     })
   }
 
