@@ -24,7 +24,7 @@ module.exports = hyperx(function x (tag, props, children) {
       }
       elProps[name] = value
     }
-    el = bel(tag, elProps, children)
+    el = bel.createElement(tag, elProps, children)
     el._co = {
       events: events
     }

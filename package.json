@@ -19,7 +19,7 @@
   "homepage": "https://github.com/chromakode/diablo#readme",
   "dependencies": {
     "hyperx": "^2.0.2",
-    "bel": "shama/bel#yo-yo",
+    "bel": "^4.1.0",
     "morphdom": "^1.1.2"
   },
   "devDependencies": {
