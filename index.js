@@ -2,12 +2,12 @@ var hyperx = require('hyperx')
 var bel = require('bel')
 var morphdom = require('morphdom')
 
-function Diablo() {
+function Diablo () {
   var x = hyperx(function x (tag, props, children) {
     var el
     if (components.hasOwnProperty(tag)) {
       // create a placeholder for a component
-      el = document.createElement('co-' + tag.toLowerCase())
+      el = bel.createElement('co-' + tag.toLowerCase(), {}, [])
       el._co = {
         component: tag,
         props: props,
