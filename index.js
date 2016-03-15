@@ -5,9 +5,28 @@ var morphdom = require('morphdom')
 function Diablo () {
   var x = hyperx(function x (tag, props, children) {
     var el
+    var name
+    var value
     if (components.hasOwnProperty(tag)) {
       // create a placeholder for a component
       el = bel.createElement('co-' + tag.toLowerCase(), {}, [])
+      // I'm not sure why hyperx stringifies numbers and bools, but let's undo it
+      for (name in props) {
+        value = props[name]
+        var numValue
+        if (typeof value === 'string') {
+          if (value === 'true') {
+            props[name] = true
+          } else if (value === 'false') {
+            props[name] = false
+          } else if (value !== '') {
+            numValue = Number(value)
+            if (!isNaN(numValue)) {
+              props[name] = numValue
+            }
+          }
+        }
+      }
       el._co = {
         component: tag,
         props: props,
@@ -17,8 +36,8 @@ function Diablo () {
       // regular node. construct with bel
       var elProps = {}
       var events = {}
-      for (var name in props) {
-        var value = props[name]
+      for (name in props) {
+        value = props[name]
         if (name.slice(0, 2) === 'on') {
           name = name.toLowerCase()
           events[name] = value
