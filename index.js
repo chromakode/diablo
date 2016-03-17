@@ -176,7 +176,8 @@ function Diablo () {
   function update (fromNode, toNode, childrenOnly) {
     morphdom(fromNode, toNode, {
       onBeforeMorphEl: onBeforeMorphEl,
-      onBeforeNodeDiscarded: onBeforeNodeDiscarded
+      onBeforeNodeDiscarded: onBeforeNodeDiscarded,
+      childrenOnly: childrenOnly
     })
 
     // descend through children and instantiate if necessary
@@ -192,9 +193,8 @@ function Diablo () {
   }
 
   x.render = function render (element, container) {
-    var toContainer = container.cloneNode()
-    toContainer.appendChild(element)
-    update(container, toContainer)
+    var toContainer = bel.createElement('div', {}, [element])
+    update(container, toContainer, false)
   }
 
   return x
