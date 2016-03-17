@@ -29,8 +29,10 @@ function Diablo () {
       }
       el._co = {
         component: tag,
-        props: props,
-        children: children
+        props: props
+      }
+      if (children.length) {
+        el._co.props.children = children
       }
     } else {
       // regular node. construct with bel
@@ -110,7 +112,6 @@ function Diablo () {
     co.instance = instance
     instance._node = prevNode || node
     instance.props = co.props
-    instance.props.children = co.children
 
     // render the component instance into the node
     var content = instance.render()
