@@ -1,5 +1,7 @@
 # Diablo
 
+[![Build Status](https://img.shields.io/travis/chromakode/diablo/master.svg?style=flat-square)](https://travis-ci.org/chromakode/diablo)
+[![Coverage Status](https://img.shields.io/coveralls/chromakode/diablo/master.svg?style=flat-square)](https://coveralls.io/github/chromakode/diablo?branch=master)
 [![npm](https://img.shields.io/npm/v/diablo.svg?style=flat-square)](https://www.npmjs.com/package/diablo)
 [![license](https://img.shields.io/npm/l/diablo.svg?style=flat-square)](https://github.com/chromakode/diablo/blob/master/LICENSE)
 
