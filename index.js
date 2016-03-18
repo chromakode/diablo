@@ -149,7 +149,7 @@ function Diablo () {
         var fromEvents = fromEl._co.events
         for (name in fromEvents) {
           if (!toEvents.hasOwnProperty(name)) {
-            delete fromEl[name]
+            fromEl[name] = undefined
           }
         }
       }
