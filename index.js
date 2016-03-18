@@ -115,6 +115,10 @@ function Diablo () {
     instance._node = prevNode || node
     instance.props = co.props
 
+    if (prevNode) {
+      prevNode._co = co
+    }
+
     // render the component instance into the node
     var content = instance.render()
     node.appendChild(content)
