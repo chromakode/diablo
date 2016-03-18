@@ -163,10 +163,12 @@ function Diablo () {
     }
   }
 
-  function onBeforeNodeDiscarded (node) {
-    if (node._co && node._co.instance && node._co.instance.componentWillUnmount) {
-      node._co.instance.componentWillUnmount()
-    }
+  function onBeforeNodeDiscarded (discardedNode) {
+    walkChildren(discardedNode, function (node) {
+      if (node._co && node._co.instance && node._co.instance.componentWillUnmount) {
+        node._co.instance.componentWillUnmount()
+      }
+    })
   }
 
   function walkChildren (node, visit) {
