@@ -62,11 +62,13 @@ function Diablo () {
     var updatedState = {}
     var name
     for (name in this.state) {
+      /* istanbul ignore else */
       if (this.state.hasOwnProperty(name)) {
         updatedState[name] = this.state[name]
       }
     }
     for (name in nextState) {
+      /* istanbul ignore else */
       if (nextState.hasOwnProperty(name)) {
         updatedState[name] = nextState[name]
       }
@@ -115,9 +117,6 @@ function Diablo () {
 
     // render the component instance into the node
     var content = instance.render()
-    while (node.firstChild) {
-      node.removeChild(node.firstChild)
-    }
     node.appendChild(content)
   }
 
@@ -141,6 +140,7 @@ function Diablo () {
       var toEvents = toEl._co.events
       var name
       for (name in toEvents) {
+        /* istanbul ignore else */
         if (toEvents.hasOwnProperty(name)) {
           fromEl[name] = toEvents[name]
         }
@@ -148,6 +148,7 @@ function Diablo () {
       if (fromEl._co && fromEl._co.events) {
         var fromEvents = fromEl._co.events
         for (name in fromEvents) {
+          /* istanbul ignore else */
           if (!toEvents.hasOwnProperty(name)) {
             fromEl[name] = undefined
           }
