@@ -31,7 +31,7 @@ function Diablo () {
         component: tag,
         props: props
       }
-      if (children.length) {
+      if (children && children.length) {
         el._co.props.children = children
       }
     } else {
