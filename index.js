@@ -153,6 +153,8 @@ function Diablo () {
           }
         }
       }
+      fromEl._co = fromEl._co || {}
+      fromEl._co.events = toEvents
     }
   }
 
