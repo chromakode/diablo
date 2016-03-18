@@ -97,7 +97,7 @@ function Diablo () {
     if (prevNode && prevNode._co && prevNode._co.instance) {
       // if an instance exists, use it
       instance = prevNode._co.instance
-      if (instance.shouldComponentUpdate && instance.shouldComponentUpdate(co.props) === false) {
+      if (instance.shouldComponentUpdate && instance.shouldComponentUpdate(co.props, instance.state) === false) {
         return false
       }
     } else {
