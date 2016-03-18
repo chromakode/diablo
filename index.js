@@ -165,9 +165,7 @@ function Diablo () {
   }
 
   function walkChildren (node, visit) {
-    if (visit(node) === false) {
-      return
-    }
+    visit(node)
     for (var i = 0; i < node.childNodes.length; i++) {
       walkChildren(node.childNodes[i], visit)
     }
