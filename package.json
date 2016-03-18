@@ -4,7 +4,8 @@
   "description": "yo-yo.js, with added components",
   "main": "index.js",
   "scripts": {
-    "lint": "standard"
+    "lint": "standard",
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,23 @@
     "morphdom": "^1.1.2"
   },
   "devDependencies": {
-    "standard": "~6.0.8"
+    "standard": "~6.0.8",
+    "mocha": "~2.4.5",
+    "webpack": "~1.12.14",
+    "babel-core": "~6.7.2",
+    "babel-plugin-transform-es2015-template-literals": "~6.6.5",
+    "babel-loader": "~6.2.4",
+    "isparta-loader": "~2.0.0",
+    "karma": "~0.13.22",
+    "karma-webpack": "~1.7.0",
+    "karma-sourcemap-loader": "~0.3.7",
+    "karma-mocha": "~0.2.2",
+    "karma-mocha-reporter": "~2.0.0",
+    "karma-phantomjs-launcher": "~1.0.0",
+    "karma-coverage": "~0.5.5",
+    "expect": "~1.15.2"
+  },
+  "standard": {
+    "globals": ["describe", "it", "before", "beforeEach"]
   }
 }
