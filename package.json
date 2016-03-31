@@ -1,6 +1,6 @@
 {
   "name": "diablo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "yo-yo.js, with added components",
   "main": "index.js",
   "scripts": {
